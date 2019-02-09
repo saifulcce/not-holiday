@@ -4,10 +4,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-               sh 'ifconfig'
-                }
+                sh 'ifconfig'
             }
         }
-
     }
 }
