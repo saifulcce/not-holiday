@@ -8,13 +8,13 @@ pipeline {
             steps {
                 script {
                     if (env.BRANCH_NAME == 'development'){
-                        sh 'if [ -d not-holiday-dev ]; then rm -fr  /var/www/html/not-holiday-dev; fi'
+                        sh 'if [ -d  /var/www/html/not-holiday-dev ]; then rm -fr  /var/www/html/not-holiday-dev; fi'
 
                     } else if (env.BRANCH_NAME == 'staging'){
-                        sh 'if [ -d not-holiday-stage ]; then rm -fr  /var/www/html/not-holiday-stage; fi'
+                        sh 'if [ -d  /var/www/html/not-holiday-stage ]; then rm -fr  /var/www/html/not-holiday-stage; fi'
 
                     } else if (env.BRANCH_NAME == 'production'){
-                         sh 'if [ -d not-holiday-prod ]; then rm -fr  /var/www/html/not-holiday-prod; fi'
+                         sh 'if [ -d  /var/www/html/not-holiday-prod ]; then rm -fr  /var/www/html/not-holiday-prod; fi'
 
                     } else {
                        echo "I dont build other branches"
