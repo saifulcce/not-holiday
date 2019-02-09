@@ -17,7 +17,7 @@ pipeline {
                         sh 'git clone -b production git@github.com:saifulcce/not-holiday.git /var/www/html/not-holiday-prod '
 
                     } else {
-                       echo "I dont build other branches" 
+                       echo "I dont build other branches"
                     }
                 }
             }
