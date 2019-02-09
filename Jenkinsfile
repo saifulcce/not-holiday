@@ -4,7 +4,26 @@ pipeline {
     
     stages {
         
-        stage('Cleanup') {
+        stage('cleanup') {
+            steps {
+                script {
+                    if (env.BRANCH_NAME == 'development'){
+                        sh 'if [ -d /not-holiday-dev ]; then rm -fr  /not-holiday-dev; fi'
+
+                    } else if (env.BRANCH_NAME == 'staging'){
+                        sh 'if [ -d /not-holiday-stage ]; then rm -fr  /not-holiday-stage; fi'
+
+                    } else if (env.BRANCH_NAME == 'production'){
+                         sh 'if [ -d /not-holiday-prod ]; then rm -fr  /not-holiday-prod; fi'
+
+                    } else {
+                       echo "I dont build other branches"
+                    }
+                }
+            }
+        }
+		
+        stage('GetCode') {
             steps {
                 script {
                     if (env.BRANCH_NAME == 'development'){
@@ -22,10 +41,28 @@ pipeline {
                 }
             }
         }
+		
+		stage('StartService') {
+            steps {
+                script {
+                    if (env.BRANCH_NAME == 'development'){
+                        sh 'sudo service apache2 restart'
+
+                    } else if (env.BRANCH_NAME == 'staging'){
+                        sh 'sudo service apache2 restart'
+
+                    } else if (env.BRANCH_NAME == 'production'){
+                        sh 'sudo service apache2 restart'
+
+                    } else {
+                       echo "I dont build other branches"
+                    }
+                }
+            }
+        }
 
 
 
 
     }
 }
-
